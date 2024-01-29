@@ -14,7 +14,6 @@ function playRound(playerSelection, computerSelection) {
 
     console.log(`User selection: ${playerSelection}.        Computer selection: ${computerSelection}.`);
 
-    message = '';
     playerWins = false;
     isDraw = false;
 
@@ -32,13 +31,30 @@ function playRound(playerSelection, computerSelection) {
     }
     
     if (isDraw === true){
-        message = `>>>>>It's a tie! ${playerSelection} equals to ${computerSelection}.<<<<<`
+        return 0;
     } else if (playerWins === true) {
-        message = `>>>>>You Win! ${playerSelection} beats ${computerSelection}<<<<<`;
+        return 1;
     } else {
-        message = `>>>>>You lose! ${playerSelection} gets beaten by ${computerSelection}<<<<<`;
+        return 2;
     }
-    return message;
+}
+
+function printWinner(player, computer, result) {
+    switch (result) {
+        case 0:
+            message = `>>>>>It's a tie! ${player} equals to ${computer}.<<<<<`;
+            console.log(message);
+            break;
+        case 1:
+            message = `>>>>>You Win! ${player} beats ${computer}<<<<<`;
+            console.log(message);
+            break;
+        case 2:
+            message = message = `>>>>>You lose! ${player} gets beaten by ${computer}<<<<<`;
+            console.log(message);
+            break;
+        default: 
+    }
 }
 
 function checkUserInput(playerChoice) {
@@ -80,6 +96,8 @@ function playGame() {
     let scoreUser = 0;
     let scoreComputer = 0;
     let drawTimes = 0;
+    let result;
+    let computerChoice;
     for (let i = 0; i < 5; i++)
     {
         playerChoice = getUserInput();
@@ -87,7 +105,8 @@ function playGame() {
             alert('You decided to cancel the game. See you next time!');
             break;
         }
-        console.log(playRound(playerChoice, getComputerChoice()));
+        computerChoice = getComputerChoice();
+        result = playRound(playerChoice, computerChoice);
+        printWinner(playerChoice, computerChoice, result);
     }
 }
-
