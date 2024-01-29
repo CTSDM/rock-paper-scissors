@@ -11,8 +11,10 @@ function playRound(playerSelection, computerSelection) {
     
     playerFirstChar = playerSelection[0];
     computerFirstChar = computerSelection[0];
-    console.log(playerSelection);
-    console.log(computerSelection);
+
+    console.log(`User selection: ${playerSelection}.`);
+    console.log(`User selection: ${computerSelection}.`);
+
     message = '';
     playerWins = false;
     isDraw = false;
@@ -20,7 +22,6 @@ function playRound(playerSelection, computerSelection) {
     if (playerFirstChar > computerFirstChar) {
         if (playerFirstChar === 'S' && computerFirstChar === 'P') {
             playerWins = true;
-            console.log("Player wins.");
         } else {
             // console.log("Computer wins.");
         }
@@ -29,18 +30,17 @@ function playRound(playerSelection, computerSelection) {
             // console.log("Computer wins.");
         } else {
             playerWins = true;
-            console.log("Player wins.");
         }       
     } else {
         isDraw = true;   
     }
     
     if (isDraw === true){
-        message = `It's a tie! ${playerSelection} equals to ${computerSelection}`
+        message = `>>>>>It's a tie! ${playerSelection} equals to ${computerSelection}.<<<<<`
     } else if (playerWins === true) {
-        message = `You Win! ${playerSelection} beats ${computerSelection}`;
+        message = `>>>>>You Win! ${playerSelection} beats ${computerSelection}<<<<<`;
     } else {
-        message = `You lose! ${playerSelection} gets beaten by ${computerSelection}`;
+        message = `>>>>>You lose! ${playerSelection} gets beaten by ${computerSelection}<<<<<`;
     }
     return message;
 }
@@ -60,8 +60,11 @@ function getUserInput() {
     isInputOkay = false;
     while(isInputOkay == false){
         strInput = prompt('What is your choice? (Rock, Paper, Scissors)');
-        strInput = normalizeString(strInput);
-        isInputOkay = checkUserInput(strInput);
+        // We check for an empty string in case the user press okay without an answer.
+        if (strInput !== '') {
+            strInput = normalizeString(strInput);
+            isInputOkay = checkUserInput(strInput);
+        }
     }
     return strInput;
 }
@@ -73,7 +76,10 @@ function normalizeString(str) {
 }
 
 function playGame() {
-    playerChoice = getUserInput();
-    console.log(playRound(playerChoice, getComputerChoice()));
+    for (let i = 0; i < 5; i++)
+    {
+        playerChoice = getUserInput();
+        console.log(playRound(playerChoice, getComputerChoice()));
+    }
 }
 
