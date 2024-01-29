@@ -61,7 +61,10 @@ function getUserInput() {
     while(isInputOkay == false){
         strInput = prompt('What is your choice? (Rock, Paper, Scissors)');
         // We check for an empty string in case the user press okay without an answer.
-        if (strInput !== '') {
+        if (strInput === null) {
+            return "cancel";
+        }
+        else if (strInput !== '') {
             strInput = normalizeString(strInput);
             isInputOkay = checkUserInput(strInput);
         }
@@ -79,6 +82,10 @@ function playGame() {
     for (let i = 0; i < 5; i++)
     {
         playerChoice = getUserInput();
+        if (playerChoice === "cancel") {
+            alert('You decided to cancel the game. See you next time!');
+            break;
+        }
         console.log(playRound(playerChoice, getComputerChoice()));
     }
 }
