@@ -56,6 +56,16 @@ function checkUserInput(playerChoice) {
     }
 }
 
+function getUserInput() {
+    isInputOkay = false;
+    while(isInputOkay == false){
+        strInput = prompt('What is your choice? (Rock, Paper, Scissors)');
+        strInput = normalizeString(strInput);
+        isInputOkay = checkUserInput(strInput);
+    }
+    return strInput;
+}
+
 function normalizeString(str) {
     // We convert the whole string into lower case and then only the first letter is converted back into upper case
     str = str.toLowerCase();
@@ -63,13 +73,7 @@ function normalizeString(str) {
 }
 
 function playGame() {
-    isInputOkay = false;
-
-    while(isInputOkay == false){
-        playerChoice = prompt('What is your choice? (Rock, Paper, Scissors)');
-        playerChoice = normalizeString(playerChoice);
-        isInputOkay = checkUserInput(playerChoice);
-    }
+    playerChoice = getUserInput();
     console.log(playRound(playerChoice, getComputerChoice()));
 }
 
