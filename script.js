@@ -12,8 +12,7 @@ function playRound(playerSelection, computerSelection) {
     playerFirstChar = playerSelection[0];
     computerFirstChar = computerSelection[0];
 
-    console.log(`User selection: ${playerSelection}.`);
-    console.log(`User selection: ${computerSelection}.`);
+    console.log(`User selection: ${playerSelection}.        Computer selection: ${computerSelection}.`);
 
     message = '';
     playerWins = false;
@@ -22,14 +21,11 @@ function playRound(playerSelection, computerSelection) {
     if (playerFirstChar > computerFirstChar) {
         if (playerFirstChar === 'S' && computerFirstChar === 'P') {
             playerWins = true;
-        } else {
-            // console.log("Computer wins.");
         }
     } else if (playerFirstChar < computerFirstChar){
-        if (playerFirstChar === 'P' && computerFirstChar === 'S') {
-            // console.log("Computer wins.");
-        } else {
+        if (!(playerFirstChar === 'P' && computerFirstChar === 'S')) {
             playerWins = true;
+        } else {
         }       
     } else {
         isDraw = true;   
@@ -56,14 +52,16 @@ function checkUserInput(playerChoice) {
     }
 }
 
+// A large part of this function can be substituted by the method "substitutes" of the type string
 function getUserInput() {
     isInputOkay = false;
     while(isInputOkay == false){
         strInput = prompt('What is your choice? (Rock, Paper, Scissors)');
-        // We check for an empty string in case the user press okay without an answer.
+        // If the user press cancel the prompt returns a null data type
         if (strInput === null) {
             return "cancel";
         }
+        // We check for an empty string in case the user press okay without an answer. 
         else if (strInput !== '') {
             strInput = normalizeString(strInput);
             isInputOkay = checkUserInput(strInput);
@@ -79,6 +77,9 @@ function normalizeString(str) {
 }
 
 function playGame() {
+    let scoreUser = 0;
+    let scoreComputer = 0;
+    let drawTimes = 0;
     for (let i = 0; i < 5; i++)
     {
         playerChoice = getUserInput();
