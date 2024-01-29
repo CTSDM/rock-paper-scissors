@@ -4,12 +4,11 @@ function getComputerChoice() {
     return options[index];
 }
 
-playerSelection = "Rock";
-
 function playRound(playerSelection, computerSelection) {
     // We only compare the first digit of the player and computer selections
     // We have a bool for the player win and a tie
-    // We only check for winning and tie conditions --> If these are not met then the player loses
+    // We only check for winning and tie conditions --> If these conditions are not met then the player loses
+    
     playerFirstChar = playerSelection[0];
     computerFirstChar = computerSelection[0];
     console.log(playerSelection);
@@ -46,5 +45,31 @@ function playRound(playerSelection, computerSelection) {
     return message;
 }
 
-console.log(playRound(playerSelection, getComputerChoice()));
+function checkUserInput(playerChoice) {
+    switch (playerChoice) {
+        case 'Rock':
+        case 'Paper':
+        case 'Scissors':
+            return true;
+        default:
+            return false;
+    }
+}
+
+function normalizeString(str) {
+    // We convert the whole string into lower case and then only the first letter is converted back into upper case
+    str = str.toLowerCase();
+    return `${str[0].toUpperCase()}${str.slice(1)}`;
+}
+
+function playGame() {
+    isInputOkay = false;
+
+    while(isInputOkay == false){
+        playerChoice = prompt('What is your choice? (Rock, Paper, Scissors)');
+        playerChoice = normalizeString(playerChoice);
+        isInputOkay = checkUserInput(playerChoice);
+    }
+    console.log(playRound(playerChoice, getComputerChoice()));
+}
 
