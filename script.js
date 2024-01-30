@@ -29,7 +29,7 @@ function playRound(playerSelection, computerSelection) {
         drawCondition = true;   
     }
     
-    if (drawConditiongi === true){
+    if (drawCondition === true){
         return 0;
     } else if (playerWins === true) {
         return 1;
