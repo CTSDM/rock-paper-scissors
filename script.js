@@ -29,7 +29,7 @@ function playRound(playerSelection, computerSelection) {
         drawCondition = true;   
     }
     
-    if (drawCondition === true){
+    if (drawConditiongi === true){
         return 0;
     } else if (playerWins === true) {
         return 1;
@@ -106,9 +106,14 @@ function playGame() {
             alert('You decided to cancel the game. See you next time!');
             break;
         }
+
         computerChoice = getComputerChoice();
         result = playRound(playerChoice, computerChoice);
+
         printWinner(playerChoice, computerChoice, result);
+
+        // updating scores
+
         if (result === 0) {
             drawTimes++;
         } else if (result === 1) {
@@ -117,8 +122,9 @@ function playGame() {
         else {
             computerScore++;
         }
+
         strPrint = `>>>>>>>>>>>> Round ${i+1}: Player score = ${playerScore} |||| Computer score = ${computerScore} ` 
-        + `|||| Total draws = ${drawTimes}`
+        + `|||| Total draws = ${drawTimes}`;
         console.log(strPrint);
     }
     
