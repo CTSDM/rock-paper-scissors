@@ -129,6 +129,10 @@ function playGame() {
     }
     
     // Printing the winner, if there is any
+    console.log('');
+    console.log('');
+    console.log('Final result:')
+    
     if (playerScore > 0 || computerScore > 0) {
         if (playerScore > computerScore) {
             console.log("Gz, you win!")
