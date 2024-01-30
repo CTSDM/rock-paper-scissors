@@ -15,7 +15,7 @@ function playRound(playerSelection, computerSelection) {
     console.log(`User selection: ${playerSelection}.        Computer selection: ${computerSelection}.`);
 
     playerWins = false;
-    isDraw = false;
+    drawCondition = false;
 
     if (playerFirstChar > computerFirstChar) {
         if (playerFirstChar === 'S' && computerFirstChar === 'P') {
@@ -24,13 +24,12 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerFirstChar < computerFirstChar){
         if (!(playerFirstChar === 'P' && computerFirstChar === 'S')) {
             playerWins = true;
-        } else {
-        }       
+        }
     } else {
-        isDraw = true;   
+        drawCondition = true;   
     }
     
-    if (isDraw === true){
+    if (drawCondition === true){
         return 0;
     } else if (playerWins === true) {
         return 1;
@@ -68,7 +67,7 @@ function checkUserInput(playerChoice) {
     }
 }
 
-// A large part of this function can be substituted by the method "substitutes" of the type string
+// A large part of this function can be substituted by the method "includes" of the type string
 function getUserInput() {
     isInputOkay = false;
     while(isInputOkay == false){
@@ -93,12 +92,14 @@ function normalizeString(str) {
 }
 
 function playGame() {
-    let scoreUser = 0;
-    let scoreComputer = 0;
+    let playerScore = 0;
+    let computerScore = 0;
     let drawTimes = 0;
+    let totalRounds = 5;
     let result;
     let computerChoice;
-    for (let i = 0; i < 5; i++)
+    let strPrint;
+    for (let i = 0; i < totalRounds; i++)
     {
         playerChoice = getUserInput();
         if (playerChoice === "cancel") {
@@ -108,5 +109,30 @@ function playGame() {
         computerChoice = getComputerChoice();
         result = playRound(playerChoice, computerChoice);
         printWinner(playerChoice, computerChoice, result);
+        if (result === 0) {
+            drawTimes++;
+        } else if (result === 1) {
+            playerScore++;
+        }
+        else {
+            computerScore++;
+        }
+        strPrint = `>>>>>>>>>>>> Round ${i+1}: Player score = ${playerScore} |||| Computer score = ${computerScore} ` 
+        + `|||| Total draws = ${drawTimes}`
+        console.log(strPrint);
+    }
+    
+    // Printing the winner, if there is any
+    if (playerScore > 0 || computerScore > 0) {
+        if (playerScore > computerScore) {
+            console.log("Gz, you win!")
+        } else if (playerScore < computerScore) {
+            console.log("Damn, in the overall computation you lose. GL next time.")
+        } else {
+            console.log("IT'S A DRAW!!!")
+        }
+    }
+    else {
+        console.log ("You and the computer coudln't even score a single point!")
     }
 }
