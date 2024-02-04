@@ -89,6 +89,7 @@ function normalizeString(str) {
 }
 
 function game() {
+    this.classList.toggle('rotation');
     let playerChoice = this.id;
     let computerChoice = getComputerChoice();
     result = playRound(playerChoice, computerChoice);
