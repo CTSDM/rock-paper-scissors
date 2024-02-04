@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    border: solid;
+    border-radius: 30%;
+    margin: 40px 20px;
+    font-size: 20px;
+    background-color: grey;
+    transition-property: background-color, font-size;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+}
+
+.active {
+    background-color: yellow;
+    font-size: 100px;
+    transition-property: background-color, font-size;
+    transition-timing-function:  ease-in-out;
+    transition-duration: 0.5s;
+}

@@ -9,7 +9,9 @@ const divRound = document.querySelector('#n-round')
 const btns = document.querySelectorAll('button');
 
 btns.forEach((btn) => {
-    btn.addEventListener('click', game)
+    btn.addEventListener('click', game);
+    btn.addEventListener('mouseenter', styleButtons);
+    btn.addEventListener('mouseleave', styleButtons);
 })
 
 
@@ -145,4 +147,8 @@ function showRoundWinner(player, computer, result) {
 
 function updateShowRound() {
     divRound.textContent = `Number of rounds played: ${currentRound}`;
+}
+
+function styleButtons() {
+    this.classList.toggle('active');
 }
